@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Streaming Premium</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: #040714;
+      font-family: 'Poppins', sans-serif;
+      color: white;
+      overflow-x: hidden;
+    }
+
+    /* BACKGROUND EFFECTS */
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+
+      background:
+        radial-gradient(circle at top left,
+          rgba(0, 119, 255, 0.18),
+          transparent 30%),
+
+        radial-gradient(circle at bottom right,
+          rgba(0, 255, 200, 0.12),
+          transparent 30%),
+
+        radial-gradient(circle at center,
+          rgba(255, 255, 255, 0.04),
+          transparent 60%);
+
+      z-index: -2;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+
+      background:
+        linear-gradient(to bottom,
+          rgba(4, 7, 20, 0.2),
+          rgba(4, 7, 20, 0.9));
+
+      z-index: -1;
+    }
+
+    /* HEADER */
+
+    .header {
+      width: 100%;
+      padding: 20px 60px;
+
+      position: fixed;
+      top: 0;
+      left: 0;
+
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      background: rgba(0, 0, 0, 0.35);
+
+      backdrop-filter: blur(16px);
+
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+
+      z-index: 999;
+    }
+
+    .logo {
+      font-size: 1.7rem;
+      font-weight: 800;
+
+      letter-spacing: 1px;
+
+      background: linear-gradient(135deg, #ffffff, #00A8E1);
+
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .btn-login {
+      padding: 12px 26px;
+
+      border-radius: 12px;
+
+      background: rgba(255, 255, 255, 0.08);
+
+      border: 1px solid rgba(255, 255, 255, 0.08);
+
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+
+      transition: .3s;
+    }
+
+    .btn-login:hover {
+      background: white;
+      color: black;
+      transform: translateY(-2px);
+    }
+
+    /* HERO */
+
+    .hero {
+      min-height: 100vh;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      text-align: center;
+
+      padding: 160px 20px 100px;
+
+      position: relative;
+    }
+
+    .hero-content {
+      max-width: 950px;
+    }
+
+    .hero-tag {
+      display: inline-block;
+
+      padding: 10px 18px;
+
+      border-radius: 999px;
+
+      background: rgba(255, 255, 255, 0.08);
+
+      border: 1px solid rgba(255, 255, 255, 0.08);
+
+      color: #d0d0d0;
+
+      font-size: 0.9rem;
+      font-weight: 500;
+
+      margin-bottom: 30px;
+    }
+
+    .hero h1 {
+      font-size: 5rem;
+      line-height: 1.05;
+
+      font-weight: 800;
+
+      margin-bottom: 25px;
+
+      letter-spacing: -3px;
+    }
+
+    .hero h1 span {
+      background: linear-gradient(135deg, #00A8E1, #3DD9FF);
+
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-subtitle {
+      max-width: 720px;
+
+      margin: 0 auto;
+
+      color: #b9c0cc;
+
+      font-size: 1.2rem;
+      line-height: 1.7;
+    }
+
+    .hero-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+
+      margin-top: 45px;
+    }
+
+    .btn-primary {
+      padding: 16px 38px;
+
+      border-radius: 14px;
+
+      background: linear-gradient(135deg,
+          #0063E5,
+          #00A8E1);
+
+      color: white;
+      text-decoration: none;
+      font-weight: 700;
+
+      transition: .3s;
+    }
+
+    .btn-primary:hover {
+      transform: scale(1.05);
+
+      box-shadow:
+        0 0 25px rgba(0, 168, 225, 0.4);
+    }
+
+    .btn-secondary {
+      padding: 16px 38px;
+
+      border-radius: 14px;
+
+      background: rgba(255, 255, 255, 0.08);
+
+      border: 1px solid rgba(255, 255, 255, 0.08);
+
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+
+      transition: .3s;
+    }
+
+    .btn-secondary:hover {
+      background: white;
+      color: black;
+    }
+
+    /* STATS */
+
+    .stats {
+      display: flex;
+      justify-content: center;
+      gap: 70px;
+      flex-wrap: wrap;
+
+      margin-top: 80px;
+    }
+
+    .stat h2 {
+      font-size: 2.5rem;
+      margin-bottom: 8px;
+    }
+
+    .stat p {
+      color: #9ca3af;
+    }
+
+    /* PLANS */
+
+    .plans {
+      padding: 120px 20px;
+
+      text-align: center;
+    }
+
+    .section-title {
+      font-size: 3.2rem;
+      margin-bottom: 15px;
+    }
+
+    .section-subtitle {
+      color: #9ca3af;
+      margin-bottom: 70px;
+      font-size: 1.1rem;
+    }
+
+    .cards {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+
+    .card {
+      width: 340px;
+
+      background: rgba(255, 255, 255, 0.05);
+
+      border: 1px solid rgba(255, 255, 255, 0.08);
+
+      border-radius: 28px;
+
+      padding: 45px 35px;
+
+      backdrop-filter: blur(16px);
+
+      position: relative;
+
+      transition: .4s;
+    }
+
+    .card:hover {
+      transform: translateY(-12px);
+
+      box-shadow:
+        0 15px 50px rgba(0, 0, 0, 0.35);
+    }
+
+    .featured {
+      border: 2px solid #00A8E1;
+
+      box-shadow:
+        0 0 35px rgba(0, 168, 225, 0.15);
+    }
+
+    .badge {
+      position: absolute;
+
+      top: -14px;
+      left: 50%;
+
+      transform: translateX(-50%);
+
+      background: linear-gradient(135deg,
+          #00A8E1,
+          #0063E5);
+
+      padding: 10px 20px;
+
+      border-radius: 999px;
+
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+
+    .card h3 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+
+    .price {
+      font-size: 3rem;
+      font-weight: 800;
+
+      margin-bottom: 10px;
+    }
+
+    .price span {
+      font-size: 1rem;
+      color: #9ca3af;
+    }
+
+    .description {
+      color: #b9c0cc;
+      margin-bottom: 30px;
+    }
+
+    .benefits {
+      list-style: none;
+      text-align: left;
+
+      margin-bottom: 35px;
+    }
+
+    .benefits li {
+      margin-bottom: 15px;
+      color: #d0d0d0;
+    }
+
+    /* FEATURES */
+
+    .features {
+      padding: 120px 20px;
+    }
+
+    .features-grid {
+      max-width: 1200px;
+
+      margin: auto;
+
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+
+      gap: 30px;
+    }
+
+    .feature-box {
+      padding: 40px;
+
+      border-radius: 24px;
+
+      background: rgba(255, 255, 255, 0.05);
+
+      border: 1px solid rgba(255, 255, 255, 0.08);
+
+      transition: .3s;
+    }
+
+    .feature-box:hover {
+      transform: translateY(-8px);
+    }
+
+    .feature-icon {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+    }
+
+    .feature-box h3 {
+      margin-bottom: 15px;
+      font-size: 1.4rem;
+    }
+
+    .feature-box p {
+      color: #b9c0cc;
+      line-height: 1.7;
+    }
+
+    /* FOOTER */
+
+    footer {
+      padding: 60px 20px;
+
+      text-align: center;
+
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    footer p {
+      color: #9ca3af;
+      line-height: 1.8;
+    }
+
+    /* RESPONSIVO */
+
+    @media (max-width: 992px) {
+
+      .hero h1 {
+        font-size: 3.8rem;
+      }
+
+    }
+
+    @media (max-width: 768px) {
+
+      .header {
+        padding: 18px 20px;
+      }
+
+      .hero {
+        padding-top: 140px;
+      }
+
+      .hero h1 {
+        font-size: 2.8rem;
+        letter-spacing: -1px;
+      }
+
+      .hero-subtitle {
+        font-size: 1rem;
+      }
+
+      .section-title {
+        font-size: 2.3rem;
+      }
+
+      .card {
+        width: 100%;
+        max-width: 380px;
+      }
+
+      .stats {
+        gap: 35px;
+      }
+
+    }
+
+    @media (max-width: 480px) {
+
+      .hero h1 {
+        font-size: 2.2rem;
+      }
+
+      .hero-buttons {
+        flex-direction: column;
+      }
+
+      .btn-primary,
+      .btn-secondary {
+        width: 100%;
+      }
+
+      .section-title {
+        font-size: 2rem;
+      }
+
+      .price {
+        font-size: 2.3rem;
+      }
+
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- HEADER -->
+
+  <header class="header">
+
+    <div class="logo">
+      STREAM+
+    </div>
+
+    <a href="#" class="btn-login">
+      Entrar
+    </a>
+
+  </header>
+
+  <!-- HERO -->
+
+  <section class="hero">
+
+    <div class="hero-content">
+
+      <div class="hero-tag">
+        ✨ Streaming Premium Ilimitado
+      </div>
+
+      <h1>
+        As melhores histórias
+        <span>em um só lugar.</span>
+      </h1>
+
+      <p class="hero-subtitle">
+        Filmes, séries e conteúdos exclusivos em qualidade premium
+        para assistir onde quiser, quando quiser.
+      </p>
+
+      <div class="hero-buttons">
+
+        <a href="#" class="btn-primary">
+          Assinar Agora
+        </a>
+
+        <a href="#planos" class="btn-secondary">
+          Ver Planos
+        </a>
+
+      </div>
+
+      <div class="stats">
+
+        <div class="stat">
+          <h2>10K+</h2>
+          <p>Filmes e Séries</p>
+        </div>
+
+        <div class="stat">
+          <h2>4K</h2>
+          <p>Ultra HD</p>
+        </div>
+
+        <div class="stat">
+          <h2>24h</h2>
+          <p>Disponível</p>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- PLANOS -->
+
+  <section class="plans" id="planos">
+
+    <h2 class="section-title">
+      Escolha seu plano
+    </h2>
+
+    <p class="section-subtitle">
+      Cancele quando quiser.
+    </p>
+
+    <div class="cards">
+
+      <div class="card">
+
+        <h3>Mensal</h3>
+
+        <div class="price">
+          R$27,90
+          <span>/mês</span>
+        </div>
+
+        <p class="description">
+          Ideal para começar agora.
+        </p>
+
+        <ul class="benefits">
+          <li>✔ Qualidade Full HD</li>
+          <li>✔ Assista em até 2 telas</li>
+          <li>✔ Cancele quando quiser</li>
+        </ul>
+
+        <a href="#" class="btn-primary">
+          Assinar
+        </a>
+
+      </div>
+
+      <div class="card featured">
+
+        <div class="badge">
+          MAIS POPULAR
+        </div>
+
+        <h3>Anual</h3>
+
+        <div class="price">
+          R$279,90
+          <span>/ano</span>
+        </div>
+
+        <p class="description">
+          Economize mais no plano anual.
+        </p>
+
+        <ul class="benefits">
+          <li>✔ Qualidade 4K Ultra HD</li>
+          <li>✔ Assista em até 4 telas</li>
+          <li>✔ Download offline</li>
+        </ul>
+
+        <a href="#" class="btn-primary">
+          Assinar
+        </a>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- FEATURES -->
+
+  <section class="features">
+
+    <div class="features-grid">
+
+      <div class="feature-box">
+
+        <div class="feature-icon">
+          🎬
+        </div>
+
+        <h3>
+          Catálogo Premium
+        </h3>
+
+        <p>
+          Milhares de filmes e séries atualizados
+          constantemente para você assistir sem limites.
+        </p>
+
+      </div>
+
+      <div class="feature-box">
+
+        <div class="feature-icon">
+          📱
+        </div>
+
+        <h3>
+          Multiplataforma
+        </h3>
+
+        <p>
+          Assista no celular, tablet, computador
+          ou Smart TV com máxima qualidade.
+        </p>
+
+      </div>
+
+      <div class="feature-box">
+
+        <div class="feature-icon">
+          ⚡
+        </div>
+
+        <h3>
+          Streaming Rápido
+        </h3>
+
+        <p>
+          Reprodução ultra rápida com tecnologia
+          moderna e sem travamentos.
+        </p>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- FOOTER -->
+
+  <footer>
+
+    <div class="logo" style="margin-bottom: 20px;">
+      STREAM+
+    </div>
+
+    <p>
+      © 2026 Stream+ Todos os direitos reservados.
+    </p>
+
+  </footer>
+
+</body>
+
+</html>
